@@ -1,0 +1,8 @@
+name=Websphere MQ Monitor
+version=2.0
+platforms=windows linux solaris
+description=Monitor Websphere MQ queue lengths.
+restartCore=true
+requiresAgentScript=false
+onUpgradeRemoveFiles=true
+onUpgradeRemoveMonitors=false
