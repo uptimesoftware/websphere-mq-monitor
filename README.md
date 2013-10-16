@@ -7,21 +7,21 @@ See http://uptimesoftware.github.io for more information.
 
 ### Category
 
-{ page.category }}
+plugin
 
 ### Version Compatibility
 
 
   
-    * Websphere MQ Monitor 2.0 - 7.2, 7.1, 7.0, 6.0
+* Websphere MQ Monitor 2.0 - 7.2, 7.1, 7.0, 6.0
   
 
   
-    * Websphere MQ Monitor 1.1 - 6.0
+* Websphere MQ Monitor 1.1 - 6.0
   
 
   
-    * Websphere MQ Monitor 1.0 - 5.5, 5.4, 5.3
+* Websphere MQ Monitor 1.0 - 5.5, 5.4, 5.3
   
 
 
@@ -45,12 +45,27 @@ None; no agent required
 
 
 ### Input Variables
-* MQ Manager Port - The port the MQ manager is listening on* MQ Channel Name - The MQ Connection Channel to communicate through* Queue List - The MQ Queues to return (Comma separated list)* Queue Check - The MQ Queues to check exist (Comma separated list)* Show SYSTEM queues - Whether the monitor returns the SYSTEM queue information
+
+* MQ Manager Port - The port the MQ manager is listening on
+
+* MQ Channel Name - The MQ Connection Channel to communicate through
+
+* Queue List - The MQ Queues to return (Comma separated list)
+
+* Queue Check - The MQ Queues to check exist (Comma separated list)
+
+* Show SYSTEM queues - Whether the monitor returns the SYSTEM queue information
+
 
 ### Output Variables
 
-* Current Queue Depth - Number of messages currently in the queue* Maximum Queue Depth - Maximum message depth of the queue
+
+* Current Queue Depth - Number of messages currently in the queue
+
+* Maximum Queue Depth - Maximum message depth of the queue
+
 
 ### Languages Used
+
 * Java
 
