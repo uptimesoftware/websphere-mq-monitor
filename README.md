@@ -12,6 +12,7 @@ plugin
 ### Version Compatibility
 
 
+* Websphere MQ Monitor 3.0 - 7.3,7.4,7.5,7.6
   
 * Websphere MQ Monitor 2.0 - 7.2, 7.1, 7.0, 6.0
   
@@ -31,7 +32,7 @@ Monitor for Websphere MQ 7.x
 
 ### Supported Monitoring Stations
 
-7.2, 7.1, 7.0, 6.0
+7.3,7.4,7.5,7.6,7.2, 7.1, 7.0, 6.0
 
 ### Supported Agents
 None; no agent required
