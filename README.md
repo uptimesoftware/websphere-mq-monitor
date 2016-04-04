@@ -12,7 +12,7 @@ plugin
 ### Version Compatibility
 
 
-* Websphere MQ Monitor 3.0 - 7.3,7.4,7.5,7.6
+* Websphere MQ Monitor 3.0 - 7.3,7.4,7.5,7.6,7.7
   
 * Websphere MQ Monitor 2.0 - 7.2, 7.1, 7.0, 6.0
   
