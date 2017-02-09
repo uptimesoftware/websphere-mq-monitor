@@ -1,8 +1,12 @@
 package com.uptimesoftware.uptime.plugin;
 
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.*;
 import java.util.*;
 import java.io.*;
 import com.ibm.mq.*;
+import com.ibm.mq.constants.MQConstants;
 import com.ibm.mq.pcf.*;
 
 import ro.fortsoft.pf4j.PluginWrapper;
@@ -95,10 +99,10 @@ public class MonitorWebsphereMQ extends Plugin {
 
 
 				pcfMessageAgent = new PCFMessageAgent(hostname, port, channelName);
-				PCFMessage pcfMessage = new PCFMessage(CMQCFC.MQCMD_INQUIRE_Q);
+				PCFMessage pcfMessage = new PCFMessage(MQConstants.MQCMD_INQUIRE_Q);
 
-				pcfMessage.addParameter(CMQC.MQCA_Q_NAME, "*");
-				pcfMessage.addParameter(CMQC.MQIA_Q_TYPE, MQC.MQQT_LOCAL);
+				pcfMessage.addParameter(MQConstants.MQCA_Q_NAME, "*");
+				pcfMessage.addParameter(MQConstants.MQIA_Q_TYPE, MQConstants.MQQT_LOCAL);
 
 				PCFMessage[] pcfMessageArray = pcfMessageAgent.send(pcfMessage);
 
@@ -106,14 +110,14 @@ public class MonitorWebsphereMQ extends Plugin {
 				for (int i = 0; i < pcfMessageArray.length; i++) {
 					PCFMessage pcfMessageResponse = pcfMessageArray[i];
 
-					String queueName = (String) pcfMessageResponse.getParameterValue(CMQC.MQCA_Q_NAME);
+					String queueName = (String) pcfMessageResponse.getParameterValue(MQConstants.MQCA_Q_NAME);
 
 
 
 					queueName = queueName.replace(".", "_").replace(":", "").trim();
 
-					Integer currentQueueDepth = (Integer) pcfMessageResponse.getParameterValue(CMQC.MQIA_CURRENT_Q_DEPTH);
-					Integer maxQueueDepth = (Integer) pcfMessageResponse.getParameterValue(CMQC.MQIA_MAX_Q_DEPTH);
+					Integer currentQueueDepth = (Integer) pcfMessageResponse.getParameterValue(MQConstants.MQIA_CURRENT_Q_DEPTH);
+					Integer maxQueueDepth = (Integer) pcfMessageResponse.getParameterValue(MQConstants.MQIA_MAX_Q_DEPTH);
 					String currentQueueDepthValue = queueName + "." + "currentQueueDepth " + currentQueueDepth;
 					String maxQueueDepthValue = queueName + "." + "maxQueueDepth " + maxQueueDepth;
 
@@ -159,10 +163,10 @@ public class MonitorWebsphereMQ extends Plugin {
 				}
 
 				if (!queueExistsList.isEmpty()) {
-					message += "The following required queues were not found\r";
+					message += "The following required queues were not found\n";
 					Iterator queueIterator = queueExistsList.iterator();
 					while (queueIterator.hasNext()) {
-						message += "Queue: " + queueIterator.next() + "\r";
+						message += "Queue: " + queueIterator.next() + "\n";
 						worstState = MonitorState.CRIT;
 					}
 
@@ -174,16 +178,16 @@ public class MonitorWebsphereMQ extends Plugin {
 
 			} catch (MQException mqe) {
 
-				message = "MQ Exception in monitor. " + mqe.getMessage() + PCFConstants.lookupReasonCode(mqe.reasonCode);
+				message = getInitialMessage() + "MQ Exception in monitor. " + mqe.getMessage() + PCFConstants.lookupReasonCode(mqe.reasonCode);
 				
 				setState(MonitorState.CRIT);
 			} catch (IOException ioe) {
 
-				message = "IO Exception in monitor. " + ioe.getMessage();
+				message = getInitialMessage() + "IO Exception in monitor. " + ioe.getMessage();
 				setState(MonitorState.CRIT);
 			} catch (Exception e) {
 
-				message = "General Exception in monitor. " + e.getMessage();
+				message = getInitialMessage() + "General Exception in monitor. " + e.getMessage();
 				setState(MonitorState.CRIT);
 			} finally {
 				try {
@@ -194,7 +198,18 @@ public class MonitorWebsphereMQ extends Plugin {
 			}
 			setMessage(message);
 		}
+
+		private String getClassFileInfo(Class<?> clazz) {
+			URL location = clazz.getResource('/' + clazz.getName().replace('.', '/') + ".class");
+			if (location == null) {
+				return "Cannot find the location of class: " + clazz.getName();
+			}
+			return location.toString();
+		}
+
+		private String getInitialMessage(){
+			return "MQ agent '" + PCFMessageAgent.class.getSimpleName() + "' class location: " + getClassFileInfo(PCFMessageAgent.class) + "\n";
+		}
 	}
 	
-
 }
