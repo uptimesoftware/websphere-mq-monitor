@@ -9,6 +9,8 @@ import com.ibm.mq.*;
 import com.ibm.mq.constants.MQConstants;
 import com.ibm.mq.pcf.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ro.fortsoft.pf4j.PluginWrapper;
 import com.uptimesoftware.uptime.plugin.api.Extension;
 import com.uptimesoftware.uptime.plugin.api.Plugin;
@@ -23,6 +25,8 @@ import com.uptimesoftware.uptime.plugin.monitor.Parameters;
  * @author chris
  */
 public class MonitorWebsphereMQ extends Plugin {
+
+	private static Logger LOGGER = LoggerFactory.getLogger(MonitorWebsphereMQ.class);
 
     public MonitorWebsphereMQ(PluginWrapper wrapper) {
         super(wrapper);
@@ -181,6 +185,7 @@ public class MonitorWebsphereMQ extends Plugin {
 				message = getInitialMessage() + "MQ Exception in monitor. " + mqe.getMessage() + PCFConstants.lookupReasonCode(mqe.reasonCode);
 				
 				setState(MonitorState.CRIT);
+				LOGGER.error(message, mqe);
 			} catch (IOException ioe) {
 
 				message = getInitialMessage() + "IO Exception in monitor. " + ioe.getMessage();
