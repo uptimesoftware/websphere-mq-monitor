@@ -12,7 +12,7 @@ plugin
 ### Version Compatibility
 
 
-* Websphere MQ Monitor 3.0 - 7.3,7.4,7.5,7.6,7.7
+* Websphere MQ Monitor 3.0 - 7.3,7.4,7.5,7.6,7.7, 7.8
   
 * Websphere MQ Monitor 2.0 - 7.2, 7.1, 7.0, 6.0
   
@@ -39,7 +39,8 @@ None; no agent required
 
 ### Installation Notes
 <p><a href="https://github.com/uptimesoftware/uptime-plugin-manager">Install using the up.time Plugin Manager</a></p>
-
+Copy *.jar files from MQ server `java/lib` folder into `uptime\plugins\java\websphere-mq-monitor\lib` folder,
+**EXCLUDING** files: `jndi.jar, jms.jar, ldap.jar, jta.jar`. These four files must NOT be in plugin's `lib` folder.. 
 
 ### Dependencies
 <p>n/a</p>
