@@ -1,1 +1,0 @@
-https://s3.amazonaws.com/the-grid/websphere-mq-monitor/MonitorWebsphereMQ-v2.0.upk
