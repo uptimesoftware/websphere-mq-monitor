@@ -39,7 +39,7 @@ None; no agent required
 
 ### Installation Notes
 Copy *.jar files from MQ server `java/lib` folder into `uptime\plugins\java\websphere-mq-monitor\lib` folder,
-**EXCLUDING** files: `jndi.jar, jms.jar, ldap.jar, jta.jar`. These four files must NOT be in plugin's `lib` folder.. 
+**EXCLUDING** files: `jndi.jar, jms.jar, ldap.jar, jta.jar`. These four files must NOT be in plugin's `lib` folder. 
 
 ### Dependencies
 <p>n/a</p>

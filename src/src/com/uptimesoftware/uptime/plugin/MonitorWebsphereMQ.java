@@ -79,8 +79,8 @@ public class MonitorWebsphereMQ extends Plugin {
 		}
 
 		
-		private PluginMonitorVariable getMonitorVariable(String queueName, String objectName, Integer value) {
-            PluginMonitorVariable monitorVariable = new PluginMonitorVariable(queueName, value.toString());
+		private PluginMonitorVariable getMonitorVariable(String objectName, String name, Integer value) {
+            PluginMonitorVariable monitorVariable = new PluginMonitorVariable(name, value.toString());
             monitorVariable.setObjectName(objectName);
             return monitorVariable;
 		}
